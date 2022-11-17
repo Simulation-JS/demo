@@ -1,11 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
-  simulationjs: ^1.0.0
+  simulationjs: ^2.0.2
   vite: ^3.2.4
 
 dependencies:
-  simulationjs: 1.0.0
+  simulationjs: 2.0.2
   vite: 3.2.4
 
 packages:
@@ -303,18 +303,8 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-  /simulationjs/1.0.0:
-    resolution: {integrity: sha512-H98RwG2cqw2CdsD8c0m2Gbn9xZNLe+Q6AXyg1vLHAP4pNNuTY6gENfVDyhp/qdP09pMCL6gmM976/djntNtMFg==}
-    dependencies:
-      uglify-js: 3.17.4
-      vite: 3.2.4
-    transitivePeerDependencies:
-      - '@types/node'
-      - less
-      - sass
-      - stylus
-      - sugarss
-      - terser
+  /simulationjs/2.0.2:
+    resolution: {integrity: sha512-yNWiuNwev1u8rm8WdVk9R+QhGjxUCvIFP5Gqc/fbCPkMv/LoI7kBPXg17DVkvhcB3vOzbPK2XC/oZPnaP1EcgA==}
     dev: false
 
   /source-map-js/1.0.2:
@@ -325,12 +315,6 @@ packages:
   /supports-preserve-symlinks-flag/1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
-    dev: false
-
-  /uglify-js/3.17.4:
-    resolution: {integrity: sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==}
-    engines: {node: '>=0.8.0'}
-    hasBin: true
     dev: false
 
   /vite/3.2.4:

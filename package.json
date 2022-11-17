@@ -7,7 +7,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "simulationjs": "^1.0.0",
+    "simulationjs": "^2.0.2",
     "vite": "^3.2.4"
   }
 }
