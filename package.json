@@ -1,0 +1,13 @@
+{
+  "name": "simulationjs-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "simulationjs": "^1.0.0",
+    "vite": "^3.2.4"
+  }
+}
