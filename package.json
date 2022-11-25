@@ -7,7 +7,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "simulationjs": "^2.2.2",
+    "simulationjs": "link:/Users/jacksonotto/code/p/simulationjs/lib/",
     "vite": "^3.2.4"
   }
 }

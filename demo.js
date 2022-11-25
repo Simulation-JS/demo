@@ -7,6 +7,7 @@ import {
   Polygon,
   Line,
   Color,
+  Vector,
 } from 'simulationjs';
 
 const canvas = new Simulation('canvas');
@@ -37,9 +38,10 @@ canvas.add(poly);
 const line = new Line(
   new Point(100, 100),
   new Point(0, 0),
-  4,
-  new Color(0, 255, 255)
+  new Color(0, 255, 255),
+  4
 );
+console.log(new Vector(0, 0).draw);
 canvas.add(line);
 
 square.on(
