@@ -41,7 +41,6 @@ const line = new Line(
   new Color(0, 255, 255),
   4
 );
-console.log(new Vector(0, 0).draw);
 canvas.add(line);
 
 square.on(
