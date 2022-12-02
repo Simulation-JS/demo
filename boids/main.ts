@@ -79,7 +79,7 @@ addBoidsToFrame(boids);
 // let showCircles = true;
 let showLines = false;
 let showCircles = false;
-let colors = true;
+let colors = false;
 
 let avoidPoint: Point | null = null;
 
