@@ -1,8 +1,12 @@
 {
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/boids",
+      "destination": "/boids/dist/index.html"
+    },
+    {
+      "source": "/basics",
+      "destination": "/basics/dist/index.html"
     }
   ]
 }
