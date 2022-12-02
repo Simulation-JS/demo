@@ -25,6 +25,7 @@ header {
 header div {
 	display: flex;
 	align-items: flex-start;
+	gap: 8px;
 }
 
 button {
