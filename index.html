@@ -10,18 +10,82 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <title>Simulation JS Demos</title>
+    <link
+      rel="stylesheet"
+      href="boids/dist/assets/index.60e7fd3a.css"
+    />
+    <title>Boids</title>
   </head>
   <body>
+    <header>
+      <div>
+        <div>
+          <span>Cohesion</span>
+          <input
+            type="range"
+            oninput="changeCohesion(+this.value)"
+            min="0"
+            max="1"
+            step="0.01"
+            id="cohesionInput"
+          />
+        </div>
+        <div>
+          <span>Alignment</span>
+          <input
+            type="range"
+            oninput="changeAlignment(+this.value)"
+            min="0"
+            max="1"
+            step="0.01"
+            id="alignmentInput"
+          />
+        </div>
+        <div>
+          <span>Seperation</span>
+          <input
+            type="range"
+            oninput="changeSeperation(+this.value)"
+            min="0"
+            max="1"
+            step="0.01"
+            id="seperationInput"
+          />
+        </div>
+        <div>
+          <span>Number of boids</span>
+          <input
+            type="range"
+            oninput="changeNumBoids(+this.value)"
+            min="1"
+            max="1000"
+            id="numBoidsInput"
+          />
+        </div>
+        <div>
+          <span>Speed reduction</span>
+          <input
+            type="range"
+            oninput="changeSpeedReduction(+this.value)"
+            min="0.5"
+            max="5"
+            step="0.05"
+            id="speedReductionInput"
+          />
+        </div>
+      </div>
+      <div>
+        <div>
+          <button onclick="toggleColors()">Toggle colors</button>
+        </div>
+      </div>
+    </header>
     <main>
-      <ul>
-        <li>
-          <a href="/basics/index.html">Basics</a>
-        </li>
-        <li>
-          <a href="/boids/index.html">Boids</a>
-        </li>
-      </ul>
+      <canvas id="canvas"></canvas>
     </main>
+    <script
+      type="module"
+      src="boids/dist/assets/index.6136847f.js"
+    ></script>
   </body>
 </html>
