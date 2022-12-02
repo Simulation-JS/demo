@@ -8,7 +8,7 @@ import {
   Vector,
   Circle,
   radToDeg,
-  Line
+  Line,
 } from 'simulationjs';
 
 const canvas = new Simulation('canvas');
@@ -53,11 +53,14 @@ seperationStrength /= speedReduction;
 avoidanceStrength /= speedReduction;
 
 // @ts-ignore
-document.getElementById('cohesionInput').value = cohesionStrength * speedReduction;
+document.getElementById('cohesionInput').value =
+  cohesionStrength * speedReduction;
 // @ts-ignore
-document.getElementById('alignmentInput').value = alignmentStrength * speedReduction;
+document.getElementById('alignmentInput').value =
+  alignmentStrength * speedReduction;
 // @ts-ignore
-document.getElementById('seperationInput').value = seperationStrength * speedReduction;
+document.getElementById('seperationInput').value =
+  seperationStrength * speedReduction;
 // @ts-ignore
 document.getElementById('numBoidsInput').value = numBoids;
 // @ts-ignore
@@ -76,7 +79,7 @@ addBoidsToFrame(boids);
 // let showCircles = true;
 let showLines = false;
 let showCircles = false;
-let colors = false;
+let colors = true;
 
 let avoidPoint: Point | null = null;
 
@@ -140,8 +143,14 @@ canvas.on('mousemove', (e: any) => {
 });
 
 function angleToRotate(avgPoint: Point, boid: Boid) {
-  const relativeAvgPoint = new Point(avgPoint.x - boid.pos.x, avgPoint.y - boid.pos.y);
-  let rotation = radToDeg(Math.atan2(relativeAvgPoint.y, relativeAvgPoint.x)) + 90 - boid.rotation;
+  const relativeAvgPoint = new Point(
+    avgPoint.x - boid.pos.x,
+    avgPoint.y - boid.pos.y
+  );
+  let rotation =
+    radToDeg(Math.atan2(relativeAvgPoint.y, relativeAvgPoint.x)) +
+    90 -
+    boid.rotation;
   if (Math.abs(rotation) > 180) {
     rotation = (360 - Math.abs(rotation)) * (Math.sign(rotation) * -1);
   }
@@ -195,19 +204,28 @@ function clampAngle(angle: number) {
     }
 
     let rotation = 0;
-    let cohesionAmount = clampAngle(angleToRotate(avgPoint, boids[i]) * cohesionStrength);
+    let cohesionAmount = clampAngle(
+      angleToRotate(avgPoint, boids[i]) * cohesionStrength
+    );
     cohesionAmount = isNaN(cohesionAmount) ? 0 : cohesionAmount;
     rotation += cohesionAmount;
 
     const relativeVec = new Vector(0, -1, averageRotation);
-    const relativePoint = new Point(relativeVec.x + boids[i].pos.x, relativeVec.y + boids[i].pos.y);
-    let alignmentAmount = clampAngle(angleToRotate(relativePoint, boids[i]) * alignmentStrength);
+    const relativePoint = new Point(
+      relativeVec.x + boids[i].pos.x,
+      relativeVec.y + boids[i].pos.y
+    );
+    let alignmentAmount = clampAngle(
+      angleToRotate(relativePoint, boids[i]) * alignmentStrength
+    );
     alignmentAmount = isNaN(alignmentAmount) ? 0 : alignmentAmount;
     rotation += alignmentAmount;
 
     let seperationRotation = 0;
     for (let j = 0; j < boidsInMinorRadius.length; j++) {
-      const angle = -angleToRotate(boidsInMinorRadius[j].pos, boids[i]) * seperationStrength;
+      const angle =
+        -angleToRotate(boidsInMinorRadius[j].pos, boids[i]) *
+        seperationStrength;
       seperationRotation += angle;
     }
     seperationRotation = clampAngle(seperationRotation);
@@ -215,7 +233,9 @@ function clampAngle(angle: number) {
     rotation += seperationRotation;
 
     if (avoidPoint && distance(avoidPoint, boids[i].pos) < avoidDist) {
-      rotation += -clampAngle(angleToRotate(avoidPoint, boids[i]) * avoidanceStrength);
+      rotation += -clampAngle(
+        angleToRotate(avoidPoint, boids[i]) * avoidanceStrength
+      );
     }
 
     rotation = clampAngle(rotation);
@@ -233,12 +253,16 @@ function clampAngle(angle: number) {
     }
 
     if (boids[i].pos.x < -overflowAmount) {
-      boids[i].moveTo(new Point(canvas.canvas.width + overflowAmount, boids[i].pos.y));
+      boids[i].moveTo(
+        new Point(canvas.canvas.width + overflowAmount, boids[i].pos.y)
+      );
     } else if (boids[i].pos.x > canvas.canvas.width + overflowAmount) {
       boids[i].moveTo(new Point(-overflowAmount, boids[i].pos.y));
     }
     if (boids[i].pos.y < -overflowAmount) {
-      boids[i].moveTo(new Point(boids[i].pos.x, canvas.canvas.height + overflowAmount));
+      boids[i].moveTo(
+        new Point(boids[i].pos.x, canvas.canvas.height + overflowAmount)
+      );
     } else if (boids[i].pos.y > canvas.canvas.height + overflowAmount) {
       boids[i].moveTo(new Point(boids[i].pos.x, -overflowAmount));
     }
@@ -248,7 +272,7 @@ function clampAngle(angle: number) {
 
 function addBoidsToFrame(boids: Boid[]) {
   boidsCollection.empty();
-  boids.forEach((boid) => boidsCollection.add(boid));
+  boids.forEach(boid => boidsCollection.add(boid));
 }
 
 function random(range: number) {
@@ -259,6 +283,10 @@ function initBoids(num: number) {
   return Array(num)
     .fill({})
     .map(() => {
-      return new Boid(random(canvas.canvas.width), random(canvas.canvas.height), random(360));
+      return new Boid(
+        random(canvas.canvas.width),
+        random(canvas.canvas.height),
+        random(360)
+      );
     });
 }
