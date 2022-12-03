@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/dist/index.html"
+    },
+    {
       "source": "/basics",
-      "destination": "/basics.html"
+      "destination": "/dist/basics.html"
     }
   ]
 }
