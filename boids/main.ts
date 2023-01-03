@@ -45,11 +45,11 @@ boidSpeed /= speedReduction;
 // 1 - 0, 1: 100%, 0: 0%
 let cohesionStrength = 0.03;
 let alignmentStrength = 0.095;
-let seperationStrength = 0.042;
+let separationStrength = 0.042;
 let avoidanceStrength = 0.4;
 cohesionStrength /= speedReduction;
 alignmentStrength /= speedReduction;
-seperationStrength /= speedReduction;
+separationStrength /= speedReduction;
 avoidanceStrength /= speedReduction;
 
 // @ts-ignore
@@ -59,8 +59,8 @@ document.getElementById('cohesionInput').value =
 document.getElementById('alignmentInput').value =
   alignmentStrength * speedReduction;
 // @ts-ignore
-document.getElementById('seperationInput').value =
-  seperationStrength * speedReduction;
+document.getElementById('separationInput').value =
+  separationStrength * speedReduction;
 // @ts-ignore
 document.getElementById('numBoidsInput').value = numBoids;
 // @ts-ignore
@@ -68,7 +68,7 @@ document.getElementById('speedReductionInput').value = speedReduction;
 
 const overflowAmount = 8;
 const minDistance = 80;
-const distToSeperate = 35;
+const distToSeparate = 35;
 const avoidDist = 180;
 const maxRotation = 15;
 
@@ -79,6 +79,7 @@ addBoidsToFrame(boids);
 // let showCircles = true;
 let showLines = false;
 let showCircles = false;
+
 let colors = false;
 
 let avoidPoint: Point | null = null;
@@ -92,7 +93,7 @@ document.getElementById('cohesion').innerHTML = toPercent(cohesionStrength);
 // @ts-ignore
 document.getElementById('alignment').innerHTML = toPercent(alignmentStrength);
 // @ts-ignore
-document.getElementById('seperation').innerHTML = toPercent(seperationStrength);
+document.getElementById('separation').innerHTML = toPercent(separationStrength);
 // @ts-ignore
 document.getElementById('numBoids').innerHTML = numBoids;
 
@@ -105,14 +106,14 @@ document.getElementById('numBoids').innerHTML = numBoids;
 (window as any).changeAlignment = (val: number) => {
   alignmentStrength = val / speedReduction;
   // @ts-ignore
-  document.getElementById('aligment').innerHTML = toPercent(alignmentStrength);
+  document.getElementById('alignment').innerHTML = toPercent(alignmentStrength);
 };
 
-(window as any).changeSeperation = (val: number) => {
-  seperationStrength = val / speedReduction;
+(window as any).changeSeparation = (val: number) => {
+  separationStrength = val / speedReduction;
   // @ts-ignore
-  document.getElementById('seperation').innerHTML =
-    toPercent(seperationStrength);
+  document.getElementById('separation').innerHTML =
+    toPercent(separationStrength);
 };
 // @ts-ignore
 document.getElementById('speedReduction').innerHTML = toPercent(speedReduction);
@@ -136,12 +137,12 @@ document.getElementById('speedReduction').innerHTML = toPercent(speedReduction);
 (window as any).changeSpeedReduction = (val: number) => {
   cohesionStrength *= speedReduction;
   alignmentStrength *= speedReduction;
-  seperationStrength *= speedReduction;
+  separationStrength *= speedReduction;
   boidSpeed *= speedReduction;
   speedReduction = val;
   cohesionStrength /= speedReduction;
   alignmentStrength /= speedReduction;
-  seperationStrength /= speedReduction;
+  separationStrength /= speedReduction;
   boidSpeed /= speedReduction;
   // @ts-ignore
   document.getElementById('speedReduction').innerHTML =
@@ -157,13 +158,13 @@ document.getElementById('speedReduction').innerHTML = toPercent(speedReduction);
   }
 };
 
-canvas.on('mousedown', (e: any) => {
+canvas.on('mousedown', (e: MouseEvent) => {
   avoidPoint = new Point(e.offsetX, e.offsetY);
 });
 canvas.on('mouseup', () => {
   avoidPoint = null;
 });
-canvas.on('mousemove', (e: any) => {
+canvas.on('mousemove', (e: MouseEvent) => {
   if (avoidPoint) {
     avoidPoint = new Point(e.offsetX, e.offsetY);
   }
@@ -217,7 +218,7 @@ function clampAngle(angle: number) {
           lines.add(line);
         }
       }
-      if (dist < distToSeperate) {
+      if (dist < distToSeparate) {
         boidsInMinorRadius.push(boids[j]);
       }
     }
@@ -248,16 +249,16 @@ function clampAngle(angle: number) {
     alignmentAmount = isNaN(alignmentAmount) ? 0 : alignmentAmount;
     rotation += alignmentAmount;
 
-    let seperationRotation = 0;
+    let separationRotation = 0;
     for (let j = 0; j < boidsInMinorRadius.length; j++) {
       const angle =
         -angleToRotate(boidsInMinorRadius[j].pos, boids[i]) *
-        seperationStrength;
-      seperationRotation += angle;
+        separationStrength;
+      separationRotation += angle;
     }
-    seperationRotation = clampAngle(seperationRotation);
-    seperationRotation = isNaN(seperationRotation) ? 0 : seperationRotation;
-    rotation += seperationRotation;
+    separationRotation = clampAngle(separationRotation);
+    separationRotation = isNaN(separationRotation) ? 0 : separationRotation;
+    rotation += separationRotation;
 
     if (avoidPoint && distance(avoidPoint, boids[i].pos) < avoidDist) {
       rotation += -clampAngle(
