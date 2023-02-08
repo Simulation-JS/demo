@@ -27,10 +27,14 @@ class Boid extends Polygon {
   constructor(x: number, y: number, r = 0) {
     super(
       new Point(x, y),
-      [new Point(0, -8), new Point(-4, 8), new Point(4, 8)],
+      [
+        new Point(0, -6 * canvas.ratio),
+        new Point(-3 * canvas.ratio, 6 * canvas.ratio),
+        new Point(3 * canvas.ratio, 6 * canvas.ratio),
+      ],
       new Color(0, 0, 0),
       r,
-      new Point(0, -2)
+      new Point(0, -1 * canvas.ratio)
     );
   }
 }
@@ -159,14 +163,14 @@ document.getElementById('speedReduction').innerHTML = toPercent(speedReduction);
 };
 
 canvas.on('mousedown', (e: MouseEvent) => {
-  avoidPoint = new Point(e.offsetX, e.offsetY);
+  avoidPoint = new Point(e.offsetX * canvas.ratio, e.offsetY * canvas.ratio);
 });
 canvas.on('mouseup', () => {
   avoidPoint = null;
 });
 canvas.on('mousemove', (e: MouseEvent) => {
   if (avoidPoint) {
-    avoidPoint = new Point(e.offsetX, e.offsetY);
+    avoidPoint = new Point(e.offsetX * canvas.ratio, e.offsetY * canvas.ratio);
   }
 });
 
@@ -273,25 +277,23 @@ function clampAngle(angle: number) {
     if (colors) {
       boids[i].fill(
         new Color(
-          (boids[i].pos.x / canvas.canvas.width) * 255,
-          (boids[i].pos.y / canvas.canvas.height) * 255,
-          255 - (boids[i].pos.x / canvas.canvas.width) * 255
+          (boids[i].pos.x / canvas.width) * 255,
+          (boids[i].pos.y / canvas.height) * 255,
+          255 - (boids[i].pos.x / canvas.width) * 255
         )
       );
     }
 
     if (boids[i].pos.x < -overflowAmount) {
-      boids[i].moveTo(
-        new Point(canvas.canvas.width + overflowAmount, boids[i].pos.y)
-      );
-    } else if (boids[i].pos.x > canvas.canvas.width + overflowAmount) {
+      boids[i].moveTo(new Point(canvas.width + overflowAmount, boids[i].pos.y));
+    } else if (boids[i].pos.x > canvas.width + overflowAmount) {
       boids[i].moveTo(new Point(-overflowAmount, boids[i].pos.y));
     }
     if (boids[i].pos.y < -overflowAmount) {
       boids[i].moveTo(
-        new Point(boids[i].pos.x, canvas.canvas.height + overflowAmount)
+        new Point(boids[i].pos.x, canvas.height + overflowAmount)
       );
-    } else if (boids[i].pos.y > canvas.canvas.height + overflowAmount) {
+    } else if (boids[i].pos.y > canvas.height + overflowAmount) {
       boids[i].moveTo(new Point(boids[i].pos.x, -overflowAmount));
     }
   }
@@ -311,10 +313,6 @@ function initBoids(num: number) {
   return Array(num)
     .fill({})
     .map(() => {
-      return new Boid(
-        random(canvas.canvas.width),
-        random(canvas.canvas.height),
-        random(360)
-      );
+      return new Boid(random(canvas.width), random(canvas.height), random(360));
     });
 }
