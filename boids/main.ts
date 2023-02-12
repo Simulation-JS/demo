@@ -211,7 +211,7 @@ function clampAngle(angle: number) {
       const p1 = boids[i].pos;
       const p2 = boids[j].pos;
       const dist = distance(p1, p2);
-      if (dist < minDistance) {
+      if (dist < minDistance && angleToRotate(boids[j].pos, boids[i]) < 140) {
         avgX += p2.x;
         avgY += p2.y;
         boidsInRange.push(boids[j]);
