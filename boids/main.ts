@@ -27,14 +27,10 @@ class Boid extends Polygon {
   constructor(x: number, y: number, r = 0) {
     super(
       new Point(x, y),
-      [
-        new Point(0, -6 * canvas.ratio),
-        new Point(-3 * canvas.ratio, 6 * canvas.ratio),
-        new Point(3 * canvas.ratio, 6 * canvas.ratio),
-      ],
+      [new Point(0, -8), new Point(-4, 8), new Point(4, 8)],
       new Color(0, 0, 0),
       r,
-      new Point(0, -1 * canvas.ratio)
+      new Point(0, -2)
     );
   }
 }
@@ -71,9 +67,9 @@ document.getElementById('numBoidsInput').value = numBoids;
 document.getElementById('speedReductionInput').value = speedReduction;
 
 const overflowAmount = 8;
-const minDistance = 80 * canvas.ratio;
-const distToSeparate = 25 * canvas.ratio;
-const avoidDist = 180 * canvas.ratio;
+const minDistance = 80;
+const distToSeparate = 35;
+const avoidDist = 180;
 const maxRotation = 15;
 
 let boids = initBoids(numBoids);
@@ -83,8 +79,7 @@ addBoidsToFrame(boids);
 // let showCircles = true;
 let showLines = false;
 let showCircles = false;
-
-let colors = false;
+let colors = true;
 
 let avoidPoint: Point | null = null;
 
@@ -162,15 +157,15 @@ document.getElementById('speedReduction').innerHTML = toPercent(speedReduction);
   }
 };
 
-canvas.on('mousedown', (e: MouseEvent) => {
-  avoidPoint = new Point(e.offsetX * canvas.ratio, e.offsetY * canvas.ratio);
+canvas.on('mousedown', (e: any) => {
+  avoidPoint = new Point(e.offsetX, e.offsetY);
 });
 canvas.on('mouseup', () => {
   avoidPoint = null;
 });
-canvas.on('mousemove', (e: MouseEvent) => {
+canvas.on('mousemove', (e: any) => {
   if (avoidPoint) {
-    avoidPoint = new Point(e.offsetX * canvas.ratio, e.offsetY * canvas.ratio);
+    avoidPoint = new Point(e.offsetX, e.offsetY);
   }
 });
 
@@ -211,7 +206,7 @@ function clampAngle(angle: number) {
       const p1 = boids[i].pos;
       const p2 = boids[j].pos;
       const dist = distance(p1, p2);
-      if (dist < minDistance && angleToRotate(boids[j].pos, boids[i]) < 140) {
+      if (dist < minDistance) {
         avgX += p2.x;
         avgY += p2.y;
         boidsInRange.push(boids[j]);
