@@ -71,9 +71,9 @@ document.getElementById('numBoidsInput').value = numBoids;
 document.getElementById('speedReductionInput').value = speedReduction;
 
 const overflowAmount = 8;
-const minDistance = 80;
-const distToSeparate = 35;
-const avoidDist = 180;
+const minDistance = 80 * canvas.ratio;
+const distToSeparate = 25 * canvas.ratio;
+const avoidDist = 180 * canvas.ratio;
 const maxRotation = 15;
 
 let boids = initBoids(numBoids);
