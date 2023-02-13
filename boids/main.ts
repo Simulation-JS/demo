@@ -158,14 +158,14 @@ document.getElementById('speedReduction').innerHTML = toPercent(speedReduction);
 };
 
 canvas.on('mousedown', (e: any) => {
-  avoidPoint = new Point(e.offsetX, e.offsetY);
+  avoidPoint = new Point(e.offsetX * canvas.ratio, e.offsetY * canvas.ratio);
 });
 canvas.on('mouseup', () => {
   avoidPoint = null;
 });
 canvas.on('mousemove', (e: any) => {
   if (avoidPoint) {
-    avoidPoint = new Point(e.offsetX, e.offsetY);
+    avoidPoint = new Point(e.offsetX * canvas.ratio, e.offsetY * canvas.ratio);
   }
 });
 
